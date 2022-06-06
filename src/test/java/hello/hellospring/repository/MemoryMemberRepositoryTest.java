@@ -14,7 +14,7 @@ public class MemoryMemberRepositoryTest {
 
     @AfterEach // 메서드 실행이 끝날때마다 실행되는 callable 메서드
     public void afterEach() {
-        repository.clearStore(); // 메모리 클리어
+        repository.clearStore(); // 이전 메소드의 테스트 결과가 남아있지 않도록 메모리 클리어
     }
 
     @Test
