@@ -21,11 +21,33 @@ public class HelloController {
         return "hello-template";
     }
 
-    // @ResponseBody : http body에 이 데이터를 직접 반환
+    // @ResponseBody 문자열 반환 : http body에 문자열을 직접 반환
     @GetMapping("hello-string")
     @ResponseBody
     public String helloString(@RequestParam("name") String name) {
         return "hello " + name;
+    }
+
+    // @ResponseBody 객체 반환 : http body에 JSON을 직접 반환
+    @GetMapping("hello-api")
+    @ResponseBody
+    public Hello helloApi(@RequestParam("name") String name) {
+        Hello hello = new Hello();
+        hello.setName(name);
+        return hello; // ResponseBody로 객체 반환 : 자동으로 JSON으로 반환됨 (HttpMessageConverter)
+    }
+
+    // 반환할 객체
+    static class Hello {
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }
 
