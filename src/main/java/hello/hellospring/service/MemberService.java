@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
 public class MemberService {
     private final MemberRepository memberRepository;
 
     // DI 가 가능하도록 파라미터로 MemberRepository 를 받을 수 있게 함
-    @Autowired
+    //@Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
