@@ -5,6 +5,9 @@
 
 # git message convention
 feat : 새로운 기능 추가
+
 fix : 버그 수정
+
 test : 테스트 코드 추가
+
 correction : 오타 수정
