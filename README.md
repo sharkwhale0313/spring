@@ -12,3 +12,5 @@ fix : 버그 수정
 test : 테스트 코드 추가
 
 correction : 오타 수정
+
+refactor : 코드 리팩토링
