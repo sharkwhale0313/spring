@@ -16,3 +16,5 @@ correction : 오타 수정
 refactor : 코드 리팩토링
 
 style : html, css 수정 및 추가
+
+sql : SQL 추가
