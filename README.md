@@ -18,3 +18,5 @@ refactor : 코드 리팩토링
 style : html, css 수정 및 추가
 
 sql : SQL 추가
+
+etc : 기타 (디비 연결, dependency 추가)
