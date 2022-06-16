@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 public class JdbcMemberRepository implements MemberRepository{
 
     private final DataSource dataSource; // DB와 연결하기 위해 DataSource 필요
@@ -100,5 +99,35 @@ public class JdbcMemberRepository implements MemberRepository{
         } finally {
             close(conn, pstmt, rs);
         }
+    }
+
+    private Connection getConnection() {
+        return DataSourceUtils.getConnection(dataSource);
+    }
+    private void close(Connection conn, PreparedStatement pstmt, ResultSet rs)
+    {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } try {
+        if (pstmt != null) {
+            pstmt.close();
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+        try {
+            if (conn != null) {
+                close(conn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } }
+
+    private void close(Connection conn) throws SQLException {
+        DataSourceUtils.releaseConnection(conn, dataSource);
     }
 }
