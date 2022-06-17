@@ -29,6 +29,8 @@ public class SpringConfig {
 
     @Bean
     public MemberRepository memberRepository() {
+        // return new MemoryMemberRepository();
+        // 새로 구현한 Repository로 바꿔끼움. 다형성
         return new JdbcMemberRepository(dataSource);
     }
 }
