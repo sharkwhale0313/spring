@@ -1,5 +1,7 @@
 package hello.hellospring.service;
 
+// DB 까지 연결한 통합 테스트
+
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
@@ -11,8 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest
-@Transactional
+@SpringBootTest // 스프링 컨테이너와 테스트를 함께 실행
+@Transactional // 테스트 시작 전에 트랜잭션을 시작하고, 테스트 완료 후에 항상 롤백
 class MemberServiceIntegrationTest {
     @Autowired MemberService memberService;
     @Autowired MemberRepository memberRepository;
