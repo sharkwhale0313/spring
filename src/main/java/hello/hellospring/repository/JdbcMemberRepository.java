@@ -25,14 +25,16 @@ public class JdbcMemberRepository implements MemberRepository{
         String sql = "insert into member(name) values(?)"; // ? : parameter binding
         Connection conn = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        ResultSet rs = null; // 결과값을 받음
         try {
-            conn = getConnection();
+            conn = getConnection(); // DB connection을 얻음 (DB와 연결될 수 있는 소켓) -> 여기에 SQL을 보내서 DB에 전달
             pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, member.getName());
+
             pstmt.executeUpdate();
-            rs = pstmt.getGeneratedKeys();
-            if (rs.next()) {
+            rs = pstmt.getGeneratedKeys(); // RETURN_GENERATED_KEYS가 자동으로 1씩 증가되는 id 생성
+
+            if (rs.next()) { // 결과값이 있으면
                 member.setId(rs.getLong(1));
             } else {
                 throw new SQLException("id 조회 실패");
@@ -41,7 +43,7 @@ public class JdbcMemberRepository implements MemberRepository{
         } catch (Exception e) {
             throw new IllegalStateException(e);
         } finally {
-            close(conn, pstmt, rs);
+            close(conn, pstmt, rs); // 외부 network와 연결되었기 때문에 자원들을 반드시 release해야함. 추후에 장애발생 가능성 방지
         }
     }
 
@@ -62,6 +64,7 @@ public class JdbcMemberRepository implements MemberRepository{
             pstmt.setString(1, name);
             rs = pstmt.executeQuery();
             if(rs.next()) {
+                // 받아온 결과로 Member 객체 만들기
                 Member member = new Member();
                 member.setId(rs.getLong("id"));
                 member.setName(rs.getString("name"));
@@ -101,6 +104,7 @@ public class JdbcMemberRepository implements MemberRepository{
         }
     }
 
+    // getConnection, close 는 반드시 DataSourceUtils를 통해서 해야함
     private Connection getConnection() {
         return DataSourceUtils.getConnection(dataSource);
     }
