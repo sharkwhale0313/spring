@@ -9,11 +9,9 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
-//아직 DB가 결정되지 않았다는 가정 하에 임시로 MemberRepository를 만든 것이므로
-//나중에 DB가 결정되면 구현체를 바꿀 때 수월하게 하기 위해
-//@Service, @Repository, @Autowired 어노테이션을 쓰지 않고
-//자바코드로 직접 Spring Bean 을 등록했다.
+// MemoryMemberRepository 에서 DI를 통해 JdbcMemberRepository로 변경
 
+// Configuration은 Spring Bean으로 관리됨
 @Configuration
 public class SpringConfig {
     private final DataSource dataSource;
